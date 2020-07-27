@@ -1,0 +1,738 @@
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"encoder.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.__tcf_0,"ax",%progbits
+  18              		.align	1
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	__tcf_0:
+  26              	.LFB150:
+  27              		.file 1 "Core/Src/encoder.cpp"
+   1:Core/Src/encoder.cpp **** #include "encoder.h"
+   2:Core/Src/encoder.cpp **** #include "stm32f407xx.h"
+   3:Core/Src/encoder.cpp **** 
+   4:Core/Src/encoder.cpp **** static encoder encoder_config[4];
+  28              		.loc 1 4 16 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              		.loc 1 4 16 is_stmt 0 view .LVU1
+  34 0000 034B     		ldr	r3, .L5
+  35 0002 00E0     		b	.L3
+  36              	.L4:
+  37              		.loc 1 4 16 discriminator 3 view .LVU2
+  38 0004 0C3B     		subs	r3, r3, #12
+  39              	.LVL0:
+  40              	.LBB28:
+  41              	.LBI28:
+  42              		.file 2 "Core/Inc/encoder.h"
+   1:Core/Inc/encoder.h **** #ifndef _ENCODER_H_
+   2:Core/Inc/encoder.h **** #define _ENCODER_H_
+   3:Core/Inc/encoder.h **** 
+   4:Core/Inc/encoder.h **** #include "stm32f4xx_hal.h"
+   5:Core/Inc/encoder.h **** #include "tim.h"
+   6:Core/Inc/encoder.h **** #include "stm32f4xx_hal_gpio.h"
+   7:Core/Inc/encoder.h **** 
+   8:Core/Inc/encoder.h **** #define PPR (998.4)
+   9:Core/Inc/encoder.h **** #define PI (3.1415)
+  10:Core/Inc/encoder.h **** #define SAMPLE_TIME (5)
+  11:Core/Inc/encoder.h **** 
+  12:Core/Inc/encoder.h **** 
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 2
+
+
+  13:Core/Inc/encoder.h **** class encoder
+  14:Core/Inc/encoder.h **** {
+  15:Core/Inc/encoder.h **** public:
+  16:Core/Inc/encoder.h ****     encoder() {}
+  17:Core/Inc/encoder.h ****     encoder(TIM_HandleTypeDef *e) : henc(e) {}
+  18:Core/Inc/encoder.h ****     encoder(encoder &&) = default;
+  19:Core/Inc/encoder.h ****     encoder(const encoder &) = default;
+  20:Core/Inc/encoder.h ****     encoder &operator=(encoder &&) = default;
+  21:Core/Inc/encoder.h ****     encoder &operator=(const encoder &) = default;
+  22:Core/Inc/encoder.h ****     ~encoder() {}
+  43              		.loc 2 22 5 is_stmt 1 discriminator 3 view .LVU3
+  44              	.L3:
+  45              		.loc 2 22 5 is_stmt 0 discriminator 3 view .LVU4
+  46              	.LBE28:
+  47              		.loc 1 4 16 discriminator 4 view .LVU5
+  48 0006 034A     		ldr	r2, .L5+4
+  49 0008 9342     		cmp	r3, r2
+  50 000a FBD1     		bne	.L4
+  51              		.loc 1 4 16 view .LVU6
+  52 000c 7047     		bx	lr
+  53              	.L6:
+  54 000e 00BF     		.align	2
+  55              	.L5:
+  56 0010 30000000 		.word	.LANCHOR0+48
+  57 0014 00000000 		.word	.LANCHOR0
+  58              		.cfi_endproc
+  59              	.LFE150:
+  61              		.section	.text._Z41__static_initialization_and_destruction_0ii,"ax",%progbits
+  62              		.align	1
+  63              		.syntax unified
+  64              		.thumb
+  65              		.thumb_func
+  66              		.fpu fpv4-sp-d16
+  68              	_Z41__static_initialization_and_destruction_0ii:
+  69              	.LVL1:
+  70              	.LFB149:
+   5:Core/Src/encoder.cpp **** 
+   6:Core/Src/encoder.cpp **** void encoder_init(void)
+   7:Core/Src/encoder.cpp **** {
+   8:Core/Src/encoder.cpp ****     encoder_config[0].set_config(&htim1);
+   9:Core/Src/encoder.cpp ****     encoder_config[1].set_config(&htim2);
+  10:Core/Src/encoder.cpp ****     encoder_config[2].set_config(&htim3);
+  11:Core/Src/encoder.cpp ****     encoder_config[3].set_config(&htim4);
+  12:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[0].get_handle(), TIM_CHANNEL_ALL);
+  13:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[1].get_handle(), TIM_CHANNEL_ALL);
+  14:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[2].get_handle(), TIM_CHANNEL_ALL);
+  15:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[3].get_handle(), TIM_CHANNEL_ALL);
+  16:Core/Src/encoder.cpp **** }
+  17:Core/Src/encoder.cpp **** 
+  18:Core/Src/encoder.cpp **** void encoder::calculate(void)
+  19:Core/Src/encoder.cpp **** {
+  20:Core/Src/encoder.cpp ****     omega = ((2 * PI * (int16_t)henc->Instance->CNT * 1000.0) / float(PPR * SAMPLE_TIME));
+  21:Core/Src/encoder.cpp ****     count += int16_t(henc->Instance->CNT);
+  22:Core/Src/encoder.cpp ****     henc->Instance->CNT = 0;
+  23:Core/Src/encoder.cpp **** }
+  24:Core/Src/encoder.cpp **** 
+  25:Core/Src/encoder.cpp **** void calculate_data(int i)
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 3
+
+
+  26:Core/Src/encoder.cpp **** {
+  27:Core/Src/encoder.cpp ****     encoder_config[i].calculate();
+  28:Core/Src/encoder.cpp **** }
+  29:Core/Src/encoder.cpp **** 
+  30:Core/Src/encoder.cpp **** float get_data(int i)
+  31:Core/Src/encoder.cpp **** {
+  32:Core/Src/encoder.cpp ****     return encoder_config[i].get_omega();
+  33:Core/Src/encoder.cpp **** }
+  34:Core/Src/encoder.cpp **** 
+  35:Core/Src/encoder.cpp **** int32_t get_cnt(int i)
+  36:Core/Src/encoder.cpp **** {
+  37:Core/Src/encoder.cpp ****     return encoder_config[i].get_count();
+  38:Core/Src/encoder.cpp **** }
+  71              		.loc 1 38 1 is_stmt 1 view -0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              		.loc 1 38 1 is_stmt 0 view .LVU8
+  76 0000 0128     		cmp	r0, #1
+  77 0002 00D0     		beq	.L15
+  78 0004 7047     		bx	lr
+  79              	.L15:
+  80              		.loc 1 38 1 discriminator 1 view .LVU9
+  81 0006 08B5     		push	{r3, lr}
+  82              	.LCFI0:
+  83              		.cfi_def_cfa_offset 8
+  84              		.cfi_offset 3, -8
+  85              		.cfi_offset 14, -4
+  86              		.loc 1 38 1 discriminator 1 view .LVU10
+  87 0008 4FF6FF73 		movw	r3, #65535
+  88 000c 9942     		cmp	r1, r3
+  89 000e 00D0     		beq	.L16
+  90              	.LVL2:
+  91              	.L7:
+  92              		.loc 1 38 1 view .LVU11
+  93 0010 08BD     		pop	{r3, pc}
+  94              	.LVL3:
+  95              	.L16:
+   4:Core/Src/encoder.cpp **** 
+  96              		.loc 1 4 32 view .LVU12
+  97 0012 0322     		movs	r2, #3
+  98 0014 074B     		ldr	r3, .L18
+  99 0016 05E0     		b	.L10
+ 100              	.LVL4:
+ 101              	.L17:
+ 102              	.LBB29:
+ 103              	.LBI29:
+  16:Core/Inc/encoder.h ****     encoder(TIM_HandleTypeDef *e) : henc(e) {}
+ 104              		.loc 2 16 5 is_stmt 1 view .LVU13
+ 105              	.LBB30:
+  16:Core/Inc/encoder.h ****     encoder(TIM_HandleTypeDef *e) : henc(e) {}
+ 106              		.loc 2 16 15 is_stmt 0 view .LVU14
+ 107 0018 0021     		movs	r1, #0
+ 108 001a 5960     		str	r1, [r3, #4]	@ float
+ 109 001c 0021     		movs	r1, #0
+ 110 001e 9960     		str	r1, [r3, #8]
+ 111              	.LVL5:
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 4
+
+
+  16:Core/Inc/encoder.h ****     encoder(TIM_HandleTypeDef *e) : henc(e) {}
+ 112              		.loc 2 16 15 view .LVU15
+ 113              	.LBE30:
+ 114              	.LBE29:
+   4:Core/Src/encoder.cpp **** 
+ 115              		.loc 1 4 32 view .LVU16
+ 116 0020 0C33     		adds	r3, r3, #12
+   4:Core/Src/encoder.cpp **** 
+ 117              		.loc 1 4 32 is_stmt 1 view .LVU17
+ 118 0022 013A     		subs	r2, r2, #1
+ 119              	.L10:
+   4:Core/Src/encoder.cpp **** 
+ 120              		.loc 1 4 32 discriminator 4 view .LVU18
+ 121 0024 002A     		cmp	r2, #0
+ 122 0026 F7DA     		bge	.L17
+   4:Core/Src/encoder.cpp **** 
+ 123              		.loc 1 4 16 is_stmt 0 discriminator 2 view .LVU19
+ 124 0028 034A     		ldr	r2, .L18+4
+ 125 002a 0449     		ldr	r1, .L18+8
+ 126 002c 0020     		movs	r0, #0
+ 127              	.LVL6:
+   4:Core/Src/encoder.cpp **** 
+ 128              		.loc 1 4 16 discriminator 2 view .LVU20
+ 129 002e FFF7FEFF 		bl	__aeabi_atexit
+ 130              	.LVL7:
+ 131              		.loc 1 38 1 discriminator 2 view .LVU21
+ 132 0032 EDE7     		b	.L7
+ 133              	.L19:
+ 134              		.align	2
+ 135              	.L18:
+ 136 0034 00000000 		.word	.LANCHOR0
+ 137 0038 00000000 		.word	__dso_handle
+ 138 003c 00000000 		.word	__tcf_0
+ 139              		.cfi_endproc
+ 140              	.LFE149:
+ 142              		.section	.text._Z12encoder_initv,"ax",%progbits
+ 143              		.align	1
+ 144              		.global	_Z12encoder_initv
+ 145              		.syntax unified
+ 146              		.thumb
+ 147              		.thumb_func
+ 148              		.fpu fpv4-sp-d16
+ 150              	_Z12encoder_initv:
+ 151              	.LFB144:
+   7:Core/Src/encoder.cpp ****     encoder_config[0].set_config(&htim1);
+ 152              		.loc 1 7 1 is_stmt 1 view -0
+ 153              		.cfi_startproc
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156 0000 10B5     		push	{r4, lr}
+ 157              	.LCFI1:
+ 158              		.cfi_def_cfa_offset 8
+ 159              		.cfi_offset 4, -8
+ 160              		.cfi_offset 14, -4
+   8:Core/Src/encoder.cpp ****     encoder_config[1].set_config(&htim2);
+ 161              		.loc 1 8 5 view .LVU23
+ 162              	.LVL8:
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 5
+
+
+ 163              	.LBB31:
+ 164              	.LBI31:
+  23:Core/Inc/encoder.h **** 
+  24:Core/Inc/encoder.h ****     void set_config(TIM_HandleTypeDef *e) { henc = e; }
+ 165              		.loc 2 24 10 view .LVU24
+ 166              	.LBB32:
+ 167              		.loc 2 24 45 view .LVU25
+ 168              		.loc 2 24 50 is_stmt 0 view .LVU26
+ 169 0002 0C4C     		ldr	r4, .L22
+ 170 0004 0C48     		ldr	r0, .L22+4
+ 171 0006 2060     		str	r0, [r4]
+ 172              	.LVL9:
+ 173              		.loc 2 24 50 view .LVU27
+ 174              	.LBE32:
+ 175              	.LBE31:
+   9:Core/Src/encoder.cpp ****     encoder_config[2].set_config(&htim3);
+ 176              		.loc 1 9 5 is_stmt 1 view .LVU28
+ 177              	.LBB33:
+ 178              	.LBI33:
+ 179              		.loc 2 24 10 view .LVU29
+ 180              	.LBB34:
+ 181              		.loc 2 24 45 view .LVU30
+ 182              		.loc 2 24 50 is_stmt 0 view .LVU31
+ 183 0008 0C4B     		ldr	r3, .L22+8
+ 184 000a E360     		str	r3, [r4, #12]
+ 185              	.LVL10:
+ 186              		.loc 2 24 50 view .LVU32
+ 187              	.LBE34:
+ 188              	.LBE33:
+  10:Core/Src/encoder.cpp ****     encoder_config[3].set_config(&htim4);
+ 189              		.loc 1 10 5 is_stmt 1 view .LVU33
+ 190              	.LBB35:
+ 191              	.LBI35:
+ 192              		.loc 2 24 10 view .LVU34
+ 193              	.LBB36:
+ 194              		.loc 2 24 45 view .LVU35
+ 195              		.loc 2 24 50 is_stmt 0 view .LVU36
+ 196 000c 0C4B     		ldr	r3, .L22+12
+ 197 000e A361     		str	r3, [r4, #24]
+ 198              	.LVL11:
+ 199              		.loc 2 24 50 view .LVU37
+ 200              	.LBE36:
+ 201              	.LBE35:
+  11:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[0].get_handle(), TIM_CHANNEL_ALL);
+ 202              		.loc 1 11 5 is_stmt 1 view .LVU38
+ 203              	.LBB37:
+ 204              	.LBI37:
+ 205              		.loc 2 24 10 view .LVU39
+ 206              	.LBB38:
+ 207              		.loc 2 24 45 view .LVU40
+ 208              		.loc 2 24 50 is_stmt 0 view .LVU41
+ 209 0010 0C4B     		ldr	r3, .L22+16
+ 210 0012 6362     		str	r3, [r4, #36]
+ 211              	.LVL12:
+ 212              		.loc 2 24 50 view .LVU42
+ 213              	.LBE38:
+ 214              	.LBE37:
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 6
+
+
+  12:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[1].get_handle(), TIM_CHANNEL_ALL);
+ 215              		.loc 1 12 5 is_stmt 1 view .LVU43
+  25:Core/Inc/encoder.h ****     void calculate(void);
+  26:Core/Inc/encoder.h ****     float get_omega() 
+  27:Core/Inc/encoder.h ****     { 
+  28:Core/Inc/encoder.h ****        //printf("\n %f", omega);
+  29:Core/Inc/encoder.h ****         return omega; 
+  30:Core/Inc/encoder.h ****     }
+  31:Core/Inc/encoder.h ****     int32_t get_count(void) {return count; }
+  32:Core/Inc/encoder.h ****     TIM_HandleTypeDef * get_handle(void) { return henc; }
+ 216              		.loc 2 32 44 view .LVU44
+  12:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[1].get_handle(), TIM_CHANNEL_ALL);
+ 217              		.loc 1 12 26 is_stmt 0 view .LVU45
+ 218 0014 3C21     		movs	r1, #60
+ 219 0016 FFF7FEFF 		bl	HAL_TIM_Encoder_Start
+ 220              	.LVL13:
+  13:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[2].get_handle(), TIM_CHANNEL_ALL);
+ 221              		.loc 1 13 5 is_stmt 1 view .LVU46
+ 222              	.LBB39:
+ 223              	.LBI39:
+ 224              		.loc 2 32 25 view .LVU47
+ 225              	.LBB40:
+ 226              		.loc 2 32 44 view .LVU48
+ 227              		.loc 2 32 44 is_stmt 0 view .LVU49
+ 228              	.LBE40:
+ 229              	.LBE39:
+  13:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[2].get_handle(), TIM_CHANNEL_ALL);
+ 230              		.loc 1 13 26 view .LVU50
+ 231 001a 3C21     		movs	r1, #60
+ 232 001c E068     		ldr	r0, [r4, #12]
+ 233 001e FFF7FEFF 		bl	HAL_TIM_Encoder_Start
+ 234              	.LVL14:
+  14:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[3].get_handle(), TIM_CHANNEL_ALL);
+ 235              		.loc 1 14 5 is_stmt 1 view .LVU51
+ 236              	.LBB41:
+ 237              	.LBI41:
+ 238              		.loc 2 32 25 view .LVU52
+ 239              	.LBB42:
+ 240              		.loc 2 32 44 view .LVU53
+ 241              		.loc 2 32 44 is_stmt 0 view .LVU54
+ 242              	.LBE42:
+ 243              	.LBE41:
+  14:Core/Src/encoder.cpp ****     HAL_TIM_Encoder_Start(encoder_config[3].get_handle(), TIM_CHANNEL_ALL);
+ 244              		.loc 1 14 26 view .LVU55
+ 245 0022 3C21     		movs	r1, #60
+ 246 0024 A069     		ldr	r0, [r4, #24]
+ 247 0026 FFF7FEFF 		bl	HAL_TIM_Encoder_Start
+ 248              	.LVL15:
+  15:Core/Src/encoder.cpp **** }
+ 249              		.loc 1 15 5 is_stmt 1 view .LVU56
+ 250              	.LBB43:
+ 251              	.LBI43:
+ 252              		.loc 2 32 25 view .LVU57
+ 253              	.LBB44:
+ 254              		.loc 2 32 44 view .LVU58
+ 255              		.loc 2 32 44 is_stmt 0 view .LVU59
+ 256              	.LBE44:
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 7
+
+
+ 257              	.LBE43:
+  15:Core/Src/encoder.cpp **** }
+ 258              		.loc 1 15 26 view .LVU60
+ 259 002a 3C21     		movs	r1, #60
+ 260 002c 606A     		ldr	r0, [r4, #36]
+ 261 002e FFF7FEFF 		bl	HAL_TIM_Encoder_Start
+ 262              	.LVL16:
+  16:Core/Src/encoder.cpp **** 
+ 263              		.loc 1 16 1 view .LVU61
+ 264 0032 10BD     		pop	{r4, pc}
+ 265              	.L23:
+ 266              		.align	2
+ 267              	.L22:
+ 268 0034 00000000 		.word	.LANCHOR0
+ 269 0038 00000000 		.word	htim1
+ 270 003c 00000000 		.word	htim2
+ 271 0040 00000000 		.word	htim3
+ 272 0044 00000000 		.word	htim4
+ 273              		.cfi_endproc
+ 274              	.LFE144:
+ 276              		.global	__aeabi_i2d
+ 277              		.global	__aeabi_dmul
+ 278              		.global	__aeabi_ddiv
+ 279              		.global	__aeabi_d2f
+ 280              		.section	.text._ZN7encoder9calculateEv,"ax",%progbits
+ 281              		.align	1
+ 282              		.global	_ZN7encoder9calculateEv
+ 283              		.syntax unified
+ 284              		.thumb
+ 285              		.thumb_func
+ 286              		.fpu fpv4-sp-d16
+ 288              	_ZN7encoder9calculateEv:
+ 289              	.LVL17:
+ 290              	.LFB145:
+  19:Core/Src/encoder.cpp ****     omega = ((2 * PI * (int16_t)henc->Instance->CNT * 1000.0) / float(PPR * SAMPLE_TIME));
+ 291              		.loc 1 19 1 is_stmt 1 view -0
+ 292              		.cfi_startproc
+ 293              		@ args = 0, pretend = 0, frame = 0
+ 294              		@ frame_needed = 0, uses_anonymous_args = 0
+  19:Core/Src/encoder.cpp ****     omega = ((2 * PI * (int16_t)henc->Instance->CNT * 1000.0) / float(PPR * SAMPLE_TIME));
+ 295              		.loc 1 19 1 is_stmt 0 view .LVU63
+ 296 0000 38B5     		push	{r3, r4, r5, lr}
+ 297              	.LCFI2:
+ 298              		.cfi_def_cfa_offset 16
+ 299              		.cfi_offset 3, -16
+ 300              		.cfi_offset 4, -12
+ 301              		.cfi_offset 5, -8
+ 302              		.cfi_offset 14, -4
+ 303 0002 0446     		mov	r4, r0
+  20:Core/Src/encoder.cpp ****     count += int16_t(henc->Instance->CNT);
+ 304              		.loc 1 20 5 is_stmt 1 view .LVU64
+  20:Core/Src/encoder.cpp ****     count += int16_t(henc->Instance->CNT);
+ 305              		.loc 1 20 33 is_stmt 0 view .LVU65
+ 306 0004 0568     		ldr	r5, [r0]
+  20:Core/Src/encoder.cpp ****     count += int16_t(henc->Instance->CNT);
+ 307              		.loc 1 20 39 view .LVU66
+ 308 0006 2B68     		ldr	r3, [r5]
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 8
+
+
+  20:Core/Src/encoder.cpp ****     count += int16_t(henc->Instance->CNT);
+ 309              		.loc 1 20 49 view .LVU67
+ 310 0008 586A     		ldr	r0, [r3, #36]
+ 311              	.LVL18:
+  20:Core/Src/encoder.cpp ****     count += int16_t(henc->Instance->CNT);
+ 312              		.loc 1 20 22 view .LVU68
+ 313 000a 00B2     		sxth	r0, r0
+ 314 000c FFF7FEFF 		bl	__aeabi_i2d
+ 315              	.LVL19:
+ 316 0010 0FA3     		adr	r3, .L26+8
+ 317 0012 D3E90023 		ldrd	r2, [r3]
+ 318 0016 FFF7FEFF 		bl	__aeabi_dmul
+ 319              	.LVL20:
+  20:Core/Src/encoder.cpp ****     count += int16_t(henc->Instance->CNT);
+ 320              		.loc 1 20 53 view .LVU69
+ 321 001a 0022     		movs	r2, #0
+ 322 001c 0A4B     		ldr	r3, .L26
+ 323 001e FFF7FEFF 		bl	__aeabi_dmul
+ 324              	.LVL21:
+  20:Core/Src/encoder.cpp ****     count += int16_t(henc->Instance->CNT);
+ 325              		.loc 1 20 63 view .LVU70
+ 326 0022 0022     		movs	r2, #0
+ 327 0024 094B     		ldr	r3, .L26+4
+ 328 0026 FFF7FEFF 		bl	__aeabi_ddiv
+ 329              	.LVL22:
+ 330 002a FFF7FEFF 		bl	__aeabi_d2f
+ 331              	.LVL23:
+  20:Core/Src/encoder.cpp ****     count += int16_t(henc->Instance->CNT);
+ 332              		.loc 1 20 11 view .LVU71
+ 333 002e 6060     		str	r0, [r4, #4]	@ float
+  21:Core/Src/encoder.cpp ****     henc->Instance->CNT = 0;
+ 334              		.loc 1 21 5 is_stmt 1 view .LVU72
+  21:Core/Src/encoder.cpp ****     henc->Instance->CNT = 0;
+ 335              		.loc 1 21 28 is_stmt 0 view .LVU73
+ 336 0030 2B68     		ldr	r3, [r5]
+  21:Core/Src/encoder.cpp ****     henc->Instance->CNT = 0;
+ 337              		.loc 1 21 38 view .LVU74
+ 338 0032 5B6A     		ldr	r3, [r3, #36]
+  21:Core/Src/encoder.cpp ****     henc->Instance->CNT = 0;
+ 339              		.loc 1 21 11 view .LVU75
+ 340 0034 A268     		ldr	r2, [r4, #8]
+ 341 0036 02FA83F3 		sxtah	r3, r2, r3
+ 342 003a A360     		str	r3, [r4, #8]
+  22:Core/Src/encoder.cpp **** }
+ 343              		.loc 1 22 5 is_stmt 1 view .LVU76
+  22:Core/Src/encoder.cpp **** }
+ 344              		.loc 1 22 11 is_stmt 0 view .LVU77
+ 345 003c 2B68     		ldr	r3, [r5]
+  22:Core/Src/encoder.cpp **** }
+ 346              		.loc 1 22 25 view .LVU78
+ 347 003e 0022     		movs	r2, #0
+ 348 0040 5A62     		str	r2, [r3, #36]
+  23:Core/Src/encoder.cpp **** 
+ 349              		.loc 1 23 1 view .LVU79
+ 350 0042 38BD     		pop	{r3, r4, r5, pc}
+ 351              	.LVL24:
+ 352              	.L27:
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 9
+
+
+  23:Core/Src/encoder.cpp **** 
+ 353              		.loc 1 23 1 view .LVU80
+ 354 0044 AFF30080 		.align	3
+ 355              	.L26:
+ 356 0048 00408F40 		.word	1083129856
+ 357 004c 0080B340 		.word	1085505536
+ 358 0050 6F1283C0 		.word	-1065151889
+ 359 0054 CA211940 		.word	1075388874
+ 360              		.cfi_endproc
+ 361              	.LFE145:
+ 363              		.section	.text._Z14calculate_datai,"ax",%progbits
+ 364              		.align	1
+ 365              		.global	_Z14calculate_datai
+ 366              		.syntax unified
+ 367              		.thumb
+ 368              		.thumb_func
+ 369              		.fpu fpv4-sp-d16
+ 371              	_Z14calculate_datai:
+ 372              	.LVL25:
+ 373              	.LFB146:
+  26:Core/Src/encoder.cpp ****     encoder_config[i].calculate();
+ 374              		.loc 1 26 1 is_stmt 1 view -0
+ 375              		.cfi_startproc
+ 376              		@ args = 0, pretend = 0, frame = 0
+ 377              		@ frame_needed = 0, uses_anonymous_args = 0
+  26:Core/Src/encoder.cpp ****     encoder_config[i].calculate();
+ 378              		.loc 1 26 1 is_stmt 0 view .LVU82
+ 379 0000 08B5     		push	{r3, lr}
+ 380              	.LCFI3:
+ 381              		.cfi_def_cfa_offset 8
+ 382              		.cfi_offset 3, -8
+ 383              		.cfi_offset 14, -4
+  27:Core/Src/encoder.cpp **** }
+ 384              		.loc 1 27 5 is_stmt 1 view .LVU83
+  27:Core/Src/encoder.cpp **** }
+ 385              		.loc 1 27 32 is_stmt 0 view .LVU84
+ 386 0002 00EB4000 		add	r0, r0, r0, lsl #1
+ 387              	.LVL26:
+  27:Core/Src/encoder.cpp **** }
+ 388              		.loc 1 27 32 view .LVU85
+ 389 0006 034B     		ldr	r3, .L30
+ 390 0008 03EB8000 		add	r0, r3, r0, lsl #2
+ 391 000c FFF7FEFF 		bl	_ZN7encoder9calculateEv
+ 392              	.LVL27:
+  28:Core/Src/encoder.cpp **** 
+ 393              		.loc 1 28 1 view .LVU86
+ 394 0010 08BD     		pop	{r3, pc}
+ 395              	.L31:
+ 396 0012 00BF     		.align	2
+ 397              	.L30:
+ 398 0014 00000000 		.word	.LANCHOR0
+ 399              		.cfi_endproc
+ 400              	.LFE146:
+ 402              		.section	.text._Z8get_datai,"ax",%progbits
+ 403              		.align	1
+ 404              		.global	_Z8get_datai
+ 405              		.syntax unified
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 10
+
+
+ 406              		.thumb
+ 407              		.thumb_func
+ 408              		.fpu fpv4-sp-d16
+ 410              	_Z8get_datai:
+ 411              	.LVL28:
+ 412              	.LFB147:
+  31:Core/Src/encoder.cpp ****     return encoder_config[i].get_omega();
+ 413              		.loc 1 31 1 is_stmt 1 view -0
+ 414              		.cfi_startproc
+ 415              		@ args = 0, pretend = 0, frame = 0
+ 416              		@ frame_needed = 0, uses_anonymous_args = 0
+ 417              		@ link register save eliminated.
+  32:Core/Src/encoder.cpp **** }
+ 418              		.loc 1 32 5 view .LVU88
+ 419              	.LBB45:
+ 420              	.LBI45:
+  26:Core/Inc/encoder.h ****     { 
+ 421              		.loc 2 26 11 view .LVU89
+ 422              	.LBB46:
+  29:Core/Inc/encoder.h ****     }
+ 423              		.loc 2 29 9 view .LVU90
+  29:Core/Inc/encoder.h ****     }
+ 424              		.loc 2 29 16 is_stmt 0 view .LVU91
+ 425 0000 00EB4000 		add	r0, r0, r0, lsl #1
+ 426              	.LVL29:
+  29:Core/Inc/encoder.h ****     }
+ 427              		.loc 2 29 16 view .LVU92
+ 428 0004 024B     		ldr	r3, .L33
+ 429 0006 03EB8000 		add	r0, r3, r0, lsl #2
+ 430              	.LVL30:
+  29:Core/Inc/encoder.h ****     }
+ 431              		.loc 2 29 16 view .LVU93
+ 432              	.LBE46:
+ 433              	.LBE45:
+  33:Core/Src/encoder.cpp **** 
+ 434              		.loc 1 33 1 view .LVU94
+ 435 000a 90ED010A 		vldr.32	s0, [r0, #4]
+ 436 000e 7047     		bx	lr
+ 437              	.L34:
+ 438              		.align	2
+ 439              	.L33:
+ 440 0010 00000000 		.word	.LANCHOR0
+ 441              		.cfi_endproc
+ 442              	.LFE147:
+ 444              		.section	.text._Z7get_cnti,"ax",%progbits
+ 445              		.align	1
+ 446              		.global	_Z7get_cnti
+ 447              		.syntax unified
+ 448              		.thumb
+ 449              		.thumb_func
+ 450              		.fpu fpv4-sp-d16
+ 452              	_Z7get_cnti:
+ 453              	.LVL31:
+ 454              	.LFB148:
+  36:Core/Src/encoder.cpp ****     return encoder_config[i].get_count();
+ 455              		.loc 1 36 1 is_stmt 1 view -0
+ 456              		.cfi_startproc
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 11
+
+
+ 457              		@ args = 0, pretend = 0, frame = 0
+ 458              		@ frame_needed = 0, uses_anonymous_args = 0
+ 459              		@ link register save eliminated.
+  37:Core/Src/encoder.cpp **** }
+ 460              		.loc 1 37 5 view .LVU96
+ 461              	.LBB47:
+ 462              	.LBI47:
+  31:Core/Inc/encoder.h ****     TIM_HandleTypeDef * get_handle(void) { return henc; }
+ 463              		.loc 2 31 13 view .LVU97
+ 464              	.LBB48:
+  31:Core/Inc/encoder.h ****     TIM_HandleTypeDef * get_handle(void) { return henc; }
+ 465              		.loc 2 31 30 view .LVU98
+  31:Core/Inc/encoder.h ****     TIM_HandleTypeDef * get_handle(void) { return henc; }
+ 466              		.loc 2 31 37 is_stmt 0 view .LVU99
+ 467 0000 00EB4000 		add	r0, r0, r0, lsl #1
+ 468              	.LVL32:
+  31:Core/Inc/encoder.h ****     TIM_HandleTypeDef * get_handle(void) { return henc; }
+ 469              		.loc 2 31 37 view .LVU100
+ 470 0004 024B     		ldr	r3, .L36
+ 471 0006 03EB8000 		add	r0, r3, r0, lsl #2
+ 472              	.LVL33:
+  31:Core/Inc/encoder.h ****     TIM_HandleTypeDef * get_handle(void) { return henc; }
+ 473              		.loc 2 31 37 view .LVU101
+ 474              	.LBE48:
+ 475              	.LBE47:
+ 476              		.loc 1 38 1 view .LVU102
+ 477 000a 8068     		ldr	r0, [r0, #8]
+ 478 000c 7047     		bx	lr
+ 479              	.L37:
+ 480 000e 00BF     		.align	2
+ 481              	.L36:
+ 482 0010 00000000 		.word	.LANCHOR0
+ 483              		.cfi_endproc
+ 484              	.LFE148:
+ 486              		.section	.text._GLOBAL__sub_I__Z12encoder_initv,"ax",%progbits
+ 487              		.align	1
+ 488              		.syntax unified
+ 489              		.thumb
+ 490              		.thumb_func
+ 491              		.fpu fpv4-sp-d16
+ 493              	_GLOBAL__sub_I__Z12encoder_initv:
+ 494              	.LFB151:
+ 495              		.loc 1 38 1 is_stmt 1 view -0
+ 496              		.cfi_startproc
+ 497              		@ args = 0, pretend = 0, frame = 0
+ 498              		@ frame_needed = 0, uses_anonymous_args = 0
+ 499 0000 08B5     		push	{r3, lr}
+ 500              	.LCFI4:
+ 501              		.cfi_def_cfa_offset 8
+ 502              		.cfi_offset 3, -8
+ 503              		.cfi_offset 14, -4
+ 504              		.loc 1 38 1 is_stmt 0 view .LVU104
+ 505 0002 4FF6FF71 		movw	r1, #65535
+ 506 0006 0120     		movs	r0, #1
+ 507 0008 FFF7FEFF 		bl	_Z41__static_initialization_and_destruction_0ii
+ 508              	.LVL34:
+ 509 000c 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 12
+
+
+ 510              		.cfi_endproc
+ 511              	.LFE151:
+ 513              		.section	.init_array,"aw",%init_array
+ 514              		.align	2
+ 515 0000 00000000 		.word	_GLOBAL__sub_I__Z12encoder_initv(target1)
+ 516              		.section	.bss._ZL14encoder_config,"aw",%nobits
+ 517              		.align	2
+ 518              		.set	.LANCHOR0,. + 0
+ 521              	_ZL14encoder_config:
+ 522 0000 00000000 		.space	48
+ 522      00000000 
+ 522      00000000 
+ 522      00000000 
+ 522      00000000 
+ 523              		.text
+ 524              	.Letext0:
+ 525              		.file 3 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 526              		.file 4 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 527              		.file 5 "Drivers/CMSIS/Include/core_cm4.h"
+ 528              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 529              		.file 7 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 530              		.file 8 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 531              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 532              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 533              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 534              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 535              		.file 13 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 536              		.file 14 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 537              		.file 15 "c:\\vsarm\\armcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 538              		.file 16 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 539              		.file 17 "Core/Inc/tim.h"
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 encoder.cpp
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:18     .text.__tcf_0:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:25     .text.__tcf_0:00000000 __tcf_0
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:56     .text.__tcf_0:00000010 $d
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:62     .text._Z41__static_initialization_and_destruction_0ii:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:68     .text._Z41__static_initialization_and_destruction_0ii:00000000 _Z41__static_initialization_and_destruction_0ii
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:136    .text._Z41__static_initialization_and_destruction_0ii:00000034 $d
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:143    .text._Z12encoder_initv:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:150    .text._Z12encoder_initv:00000000 _Z12encoder_initv
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:268    .text._Z12encoder_initv:00000034 $d
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:281    .text._ZN7encoder9calculateEv:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:288    .text._ZN7encoder9calculateEv:00000000 _ZN7encoder9calculateEv
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:356    .text._ZN7encoder9calculateEv:00000048 $d
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:364    .text._Z14calculate_datai:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:371    .text._Z14calculate_datai:00000000 _Z14calculate_datai
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:398    .text._Z14calculate_datai:00000014 $d
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:403    .text._Z8get_datai:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:410    .text._Z8get_datai:00000000 _Z8get_datai
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:440    .text._Z8get_datai:00000010 $d
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:445    .text._Z7get_cnti:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:452    .text._Z7get_cnti:00000000 _Z7get_cnti
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:482    .text._Z7get_cnti:00000010 $d
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:487    .text._GLOBAL__sub_I__Z12encoder_initv:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:493    .text._GLOBAL__sub_I__Z12encoder_initv:00000000 _GLOBAL__sub_I__Z12encoder_initv
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:514    .init_array:00000000 $d
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:517    .bss._ZL14encoder_config:00000000 $d
+C:\Users\DELL\AppData\Local\Temp\ccY38NMR.s:521    .bss._ZL14encoder_config:00000000 _ZL14encoder_config
+
+UNDEFINED SYMBOLS
+__aeabi_atexit
+__dso_handle
+HAL_TIM_Encoder_Start
+htim1
+htim2
+htim3
+htim4
+__aeabi_i2d
+__aeabi_dmul
+__aeabi_ddiv
+__aeabi_d2f

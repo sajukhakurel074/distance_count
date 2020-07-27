@@ -1,0 +1,819 @@
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"distance.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	__aeabi_f2d
+  18              		.global	__aeabi_dmul
+  19              		.global	__aeabi_d2f
+  20              		.section	.text._ZN8distance10calculate1Ev,"ax",%progbits
+  21              		.align	1
+  22              		.global	_ZN8distance10calculate1Ev
+  23              		.arch armv7e-m
+  24              		.syntax unified
+  25              		.thumb
+  26              		.thumb_func
+  27              		.fpu fpv4-sp-d16
+  29              	_ZN8distance10calculate1Ev:
+  30              	.LVL0:
+  31              	.LFB385:
+  32              		.file 1 "Core/Src/distance.cpp"
+   1:Core/Src/distance.cpp **** #include "distance.h"
+   2:Core/Src/distance.cpp **** #include "math.h"
+   3:Core/Src/distance.cpp **** #include "actuator.h"
+   4:Core/Src/distance.cpp **** #include "encoder.h"
+   5:Core/Src/distance.cpp **** 
+   6:Core/Src/distance.cpp **** distance dis;
+   7:Core/Src/distance.cpp **** void distance::calculate1(void)
+   8:Core/Src/distance.cpp **** {
+  33              		.loc 1 8 1 view -0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37              		.loc 1 8 1 is_stmt 0 view .LVU1
+  38 0000 10B5     		push	{r4, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 8
+  41              		.cfi_offset 4, -8
+  42              		.cfi_offset 14, -4
+  43 0002 0446     		mov	r4, r0
+   9:Core/Src/distance.cpp ****     calculate_data(0);
+  44              		.loc 1 9 5 is_stmt 1 view .LVU2
+  45              		.loc 1 9 19 is_stmt 0 view .LVU3
+  46 0004 0020     		movs	r0, #0
+  47              	.LVL1:
+  48              		.loc 1 9 19 view .LVU4
+  49 0006 FFF7FEFF 		bl	_Z14calculate_datai
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 2
+
+
+  50              	.LVL2:
+  10:Core/Src/distance.cpp ****     calculate_data(1);
+  51              		.loc 1 10 5 is_stmt 1 view .LVU5
+  52              		.loc 1 10 19 is_stmt 0 view .LVU6
+  53 000a 0120     		movs	r0, #1
+  54 000c FFF7FEFF 		bl	_Z14calculate_datai
+  55              	.LVL3:
+  11:Core/Src/distance.cpp ****     calculate_data(2);
+  56              		.loc 1 11 5 is_stmt 1 view .LVU7
+  57              		.loc 1 11 19 is_stmt 0 view .LVU8
+  58 0010 0220     		movs	r0, #2
+  59 0012 FFF7FEFF 		bl	_Z14calculate_datai
+  60              	.LVL4:
+  12:Core/Src/distance.cpp ****     calculate_data(3);
+  61              		.loc 1 12 5 is_stmt 1 view .LVU9
+  62              		.loc 1 12 19 is_stmt 0 view .LVU10
+  63 0016 0320     		movs	r0, #3
+  64 0018 FFF7FEFF 		bl	_Z14calculate_datai
+  65              	.LVL5:
+  13:Core/Src/distance.cpp ****     w[0][0] = get_data(0) * 1.414;
+  66              		.loc 1 13 5 is_stmt 1 view .LVU11
+  67              		.loc 1 13 23 is_stmt 0 view .LVU12
+  68 001c 0020     		movs	r0, #0
+  69 001e FFF7FEFF 		bl	_Z8get_datai
+  70              	.LVL6:
+  71 0022 10EE100A 		vmov	r0, s0
+  72 0026 FFF7FEFF 		bl	__aeabi_f2d
+  73              	.LVL7:
+  74              		.loc 1 13 27 view .LVU13
+  75 002a 1BA3     		adr	r3, .L3
+  76 002c D3E90023 		ldrd	r2, [r3]
+  77 0030 FFF7FEFF 		bl	__aeabi_dmul
+  78              	.LVL8:
+  79 0034 FFF7FEFF 		bl	__aeabi_d2f
+  80              	.LVL9:
+  81              		.loc 1 13 13 view .LVU14
+  82 0038 2063     		str	r0, [r4, #48]	@ float
+  14:Core/Src/distance.cpp ****     w[1][0] = get_data(1) * 1.414;
+  83              		.loc 1 14 5 is_stmt 1 view .LVU15
+  84              		.loc 1 14 23 is_stmt 0 view .LVU16
+  85 003a 0120     		movs	r0, #1
+  86 003c FFF7FEFF 		bl	_Z8get_datai
+  87              	.LVL10:
+  88 0040 10EE100A 		vmov	r0, s0
+  89 0044 FFF7FEFF 		bl	__aeabi_f2d
+  90              	.LVL11:
+  91              		.loc 1 14 27 view .LVU17
+  92 0048 13A3     		adr	r3, .L3
+  93 004a D3E90023 		ldrd	r2, [r3]
+  94 004e FFF7FEFF 		bl	__aeabi_dmul
+  95              	.LVL12:
+  96 0052 FFF7FEFF 		bl	__aeabi_d2f
+  97              	.LVL13:
+  98              		.loc 1 14 13 view .LVU18
+  99 0056 6063     		str	r0, [r4, #52]	@ float
+  15:Core/Src/distance.cpp ****     w[2][0] = get_data(2) * 1.414;
+ 100              		.loc 1 15 5 is_stmt 1 view .LVU19
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 3
+
+
+ 101              		.loc 1 15 23 is_stmt 0 view .LVU20
+ 102 0058 0220     		movs	r0, #2
+ 103 005a FFF7FEFF 		bl	_Z8get_datai
+ 104              	.LVL14:
+ 105 005e 10EE100A 		vmov	r0, s0
+ 106 0062 FFF7FEFF 		bl	__aeabi_f2d
+ 107              	.LVL15:
+ 108              		.loc 1 15 27 view .LVU21
+ 109 0066 0CA3     		adr	r3, .L3
+ 110 0068 D3E90023 		ldrd	r2, [r3]
+ 111 006c FFF7FEFF 		bl	__aeabi_dmul
+ 112              	.LVL16:
+ 113 0070 FFF7FEFF 		bl	__aeabi_d2f
+ 114              	.LVL17:
+ 115              		.loc 1 15 13 view .LVU22
+ 116 0074 A063     		str	r0, [r4, #56]	@ float
+  16:Core/Src/distance.cpp ****     w[3][0] = get_data(3) * 1.414;
+ 117              		.loc 1 16 5 is_stmt 1 view .LVU23
+ 118              		.loc 1 16 23 is_stmt 0 view .LVU24
+ 119 0076 0320     		movs	r0, #3
+ 120 0078 FFF7FEFF 		bl	_Z8get_datai
+ 121              	.LVL18:
+ 122 007c 10EE100A 		vmov	r0, s0
+ 123 0080 FFF7FEFF 		bl	__aeabi_f2d
+ 124              	.LVL19:
+ 125              		.loc 1 16 27 view .LVU25
+ 126 0084 04A3     		adr	r3, .L3
+ 127 0086 D3E90023 		ldrd	r2, [r3]
+ 128 008a FFF7FEFF 		bl	__aeabi_dmul
+ 129              	.LVL20:
+ 130 008e FFF7FEFF 		bl	__aeabi_d2f
+ 131              	.LVL21:
+ 132              		.loc 1 16 13 view .LVU26
+ 133 0092 E063     		str	r0, [r4, #60]	@ float
+  17:Core/Src/distance.cpp **** }
+ 134              		.loc 1 17 1 view .LVU27
+ 135 0094 10BD     		pop	{r4, pc}
+ 136              	.LVL22:
+ 137              	.L4:
+ 138              		.loc 1 17 1 view .LVU28
+ 139 0096 00BF     		.align	3
+ 140              	.L3:
+ 141 0098 39B4C876 		.word	1992864825
+ 142 009c BE9FF63F 		.word	1073127358
+ 143              		.cfi_endproc
+ 144              	.LFE385:
+ 146              		.section	.text._ZN8distance10calculate2Ev,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	_ZN8distance10calculate2Ev
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 152              		.fpu fpv4-sp-d16
+ 154              	_ZN8distance10calculate2Ev:
+ 155              	.LVL23:
+ 156              	.LFB386:
+  18:Core/Src/distance.cpp **** void distance::calculate2(void)
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 4
+
+
+  19:Core/Src/distance.cpp **** {
+ 157              		.loc 1 19 1 is_stmt 1 view -0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 0
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161              		.loc 1 19 1 is_stmt 0 view .LVU30
+ 162 0000 70B5     		push	{r4, r5, r6, lr}
+ 163              	.LCFI1:
+ 164              		.cfi_def_cfa_offset 16
+ 165              		.cfi_offset 4, -16
+ 166              		.cfi_offset 5, -12
+ 167              		.cfi_offset 6, -8
+ 168              		.cfi_offset 14, -4
+ 169 0002 2DED028B 		vpush.64	{d8}
+ 170              	.LCFI2:
+ 171              		.cfi_def_cfa_offset 24
+ 172              		.cfi_offset 80, -24
+ 173              		.cfi_offset 81, -20
+ 174 0006 0546     		mov	r5, r0
+  20:Core/Src/distance.cpp ****     for (int i = 0; i < 3; i++)
+ 175              		.loc 1 20 5 is_stmt 1 view .LVU31
+ 176              	.LVL24:
+ 177              	.LBB8:
+ 178              		.loc 1 20 14 is_stmt 0 view .LVU32
+ 179 0008 0026     		movs	r6, #0
+ 180 000a 23E0     		b	.L9
+ 181              	.LVL25:
+ 182              	.L11:
+ 183              	.LBB9:
+ 184              	.LBB10:
+  21:Core/Src/distance.cpp ****     {
+  22:Core/Src/distance.cpp ****         float sum = 0;
+  23:Core/Src/distance.cpp ****         for (int k = 0; k < 4; k++)
+  24:Core/Src/distance.cpp ****         {
+  25:Core/Src/distance.cpp ****             sum = sum + a[i][k] * w[k][0];
+ 185              		.loc 1 25 13 is_stmt 1 discriminator 2 view .LVU33
+ 186              		.loc 1 25 31 is_stmt 0 discriminator 2 view .LVU34
+ 187 000c 04EB8603 		add	r3, r4, r6, lsl #2
+ 188 0010 05EB8303 		add	r3, r5, r3, lsl #2
+ 189 0014 D3ED007A 		vldr.32	s15, [r3]
+ 190              		.loc 1 25 41 discriminator 2 view .LVU35
+ 191 0018 04F10C03 		add	r3, r4, #12
+ 192 001c 05EB8303 		add	r3, r5, r3, lsl #2
+ 193 0020 93ED007A 		vldr.32	s14, [r3]
+ 194              		.loc 1 25 33 discriminator 2 view .LVU36
+ 195 0024 67EE877A 		vmul.f32	s15, s15, s14
+ 196              		.loc 1 25 17 discriminator 2 view .LVU37
+ 197 0028 38EE278A 		vadd.f32	s16, s16, s15
+ 198              	.LVL26:
+  26:Core/Src/distance.cpp ****             c[i][0] = sum * RADIUS;
+ 199              		.loc 1 26 13 is_stmt 1 discriminator 2 view .LVU38
+ 200              		.loc 1 26 23 is_stmt 0 discriminator 2 view .LVU39
+ 201 002c 18EE100A 		vmov	r0, s16
+ 202 0030 FFF7FEFF 		bl	__aeabi_f2d
+ 203              	.LVL27:
+ 204              		.loc 1 26 27 discriminator 2 view .LVU40
+ 205 0034 0DA3     		adr	r3, .L12+4
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 5
+
+
+ 206 0036 D3E90023 		ldrd	r2, [r3]
+ 207 003a FFF7FEFF 		bl	__aeabi_dmul
+ 208              	.LVL28:
+ 209 003e FFF7FEFF 		bl	__aeabi_d2f
+ 210              	.LVL29:
+ 211              		.loc 1 26 21 discriminator 2 view .LVU41
+ 212 0042 06F11003 		add	r3, r6, #16
+ 213 0046 05EB8303 		add	r3, r5, r3, lsl #2
+ 214 004a 1860     		str	r0, [r3]	@ float
+  23:Core/Src/distance.cpp ****         {
+ 215              		.loc 1 23 9 is_stmt 1 discriminator 2 view .LVU42
+ 216 004c 0134     		adds	r4, r4, #1
+ 217              	.LVL30:
+ 218              	.L8:
+  23:Core/Src/distance.cpp ****         {
+ 219              		.loc 1 23 27 discriminator 3 view .LVU43
+ 220 004e 032C     		cmp	r4, #3
+ 221 0050 DCDD     		ble	.L11
+ 222              	.LBE10:
+ 223              	.LBE9:
+  20:Core/Src/distance.cpp ****     {
+ 224              		.loc 1 20 5 discriminator 2 view .LVU44
+ 225 0052 0136     		adds	r6, r6, #1
+ 226              	.LVL31:
+ 227              	.L9:
+  20:Core/Src/distance.cpp ****     {
+ 228              		.loc 1 20 23 discriminator 1 view .LVU45
+ 229 0054 022E     		cmp	r6, #2
+ 230 0056 03DC     		bgt	.L5
+ 231              	.LBB12:
+ 232              	.LBB11:
+  23:Core/Src/distance.cpp ****         {
+ 233              		.loc 1 23 18 is_stmt 0 view .LVU46
+ 234 0058 0024     		movs	r4, #0
+ 235              	.LBE11:
+  22:Core/Src/distance.cpp ****         for (int k = 0; k < 4; k++)
+ 236              		.loc 1 22 15 view .LVU47
+ 237 005a 9FED038A 		vldr.32	s16, .L12
+ 238 005e F6E7     		b	.L8
+ 239              	.L5:
+ 240              	.LBE12:
+ 241              	.LBE8:
+  27:Core/Src/distance.cpp ****         }
+  28:Core/Src/distance.cpp ****     }
+  29:Core/Src/distance.cpp **** }
+ 242              		.loc 1 29 1 view .LVU48
+ 243 0060 BDEC028B 		vldm	sp!, {d8}
+ 244              	.LCFI3:
+ 245              		.cfi_restore 80
+ 246              		.cfi_restore 81
+ 247              		.cfi_def_cfa_offset 16
+ 248 0064 70BD     		pop	{r4, r5, r6, pc}
+ 249              	.LVL32:
+ 250              	.L13:
+ 251              		.loc 1 29 1 view .LVU49
+ 252 0066 00BF     		.align	3
+ 253              	.L12:
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 6
+
+
+ 254 0068 00000000 		.word	0
+ 255 006c 33333333 		.word	858993459
+ 256 0070 33331B40 		.word	1075524403
+ 257              		.cfi_endproc
+ 258              	.LFE386:
+ 260              		.global	__aeabi_ddiv
+ 261              		.global	__aeabi_dadd
+ 262              		.section	.text._ZN8distance10calculate3Ev,"ax",%progbits
+ 263              		.align	1
+ 264              		.global	_ZN8distance10calculate3Ev
+ 265              		.syntax unified
+ 266              		.thumb
+ 267              		.thumb_func
+ 268              		.fpu fpv4-sp-d16
+ 270              	_ZN8distance10calculate3Ev:
+ 271              	.LVL33:
+ 272              	.LFB387:
+  30:Core/Src/distance.cpp **** 
+  31:Core/Src/distance.cpp **** void distance::calculate3(void)
+  32:Core/Src/distance.cpp **** {
+ 273              		.loc 1 32 1 is_stmt 1 view -0
+ 274              		.cfi_startproc
+ 275              		@ args = 0, pretend = 0, frame = 0
+ 276              		@ frame_needed = 0, uses_anonymous_args = 0
+ 277              		.loc 1 32 1 is_stmt 0 view .LVU51
+ 278 0000 D0B5     		push	{r4, r6, r7, lr}
+ 279              	.LCFI4:
+ 280              		.cfi_def_cfa_offset 16
+ 281              		.cfi_offset 4, -16
+ 282              		.cfi_offset 6, -12
+ 283              		.cfi_offset 7, -8
+ 284              		.cfi_offset 14, -4
+ 285 0002 2DED028B 		vpush.64	{d8}
+ 286              	.LCFI5:
+ 287              		.cfi_def_cfa_offset 24
+ 288              		.cfi_offset 80, -24
+ 289              		.cfi_offset 81, -20
+ 290 0006 0446     		mov	r4, r0
+  33:Core/Src/distance.cpp ****     finaldistance[0][0] = finaldistance[0][0] + ((c[0][0] * SAMPLE_TIME) / 100000.0);
+ 291              		.loc 1 33 5 is_stmt 1 view .LVU52
+ 292              		.loc 1 33 45 is_stmt 0 view .LVU53
+ 293 0008 C06C     		ldr	r0, [r0, #76]	@ float
+ 294              	.LVL34:
+ 295              		.loc 1 33 45 view .LVU54
+ 296 000a FFF7FEFF 		bl	__aeabi_f2d
+ 297              	.LVL35:
+ 298 000e 0646     		mov	r6, r0
+ 299 0010 0F46     		mov	r7, r1
+ 300              		.loc 1 33 57 view .LVU55
+ 301 0012 D4ED107A 		vldr.32	s15, [r4, #64]
+ 302              		.loc 1 33 59 view .LVU56
+ 303 0016 B1EE048A 		vmov.f32	s16, #5.0e+0
+ 304 001a 67EE887A 		vmul.f32	s15, s15, s16
+ 305 001e 17EE900A 		vmov	r0, s15
+ 306 0022 FFF7FEFF 		bl	__aeabi_f2d
+ 307              	.LVL36:
+ 308              		.loc 1 33 74 view .LVU57
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 7
+
+
+ 309 0026 24A3     		adr	r3, .L16
+ 310 0028 D3E90023 		ldrd	r2, [r3]
+ 311 002c FFF7FEFF 		bl	__aeabi_ddiv
+ 312              	.LVL37:
+ 313 0030 0246     		mov	r2, r0
+ 314 0032 0B46     		mov	r3, r1
+ 315              		.loc 1 33 47 view .LVU58
+ 316 0034 3046     		mov	r0, r6
+ 317 0036 3946     		mov	r1, r7
+ 318 0038 FFF7FEFF 		bl	__aeabi_dadd
+ 319              	.LVL38:
+ 320 003c FFF7FEFF 		bl	__aeabi_d2f
+ 321              	.LVL39:
+ 322              		.loc 1 33 25 view .LVU59
+ 323 0040 E064     		str	r0, [r4, #76]	@ float
+  34:Core/Src/distance.cpp ****     finaldistance[1][0] = finaldistance[1][0] + ((c[1][0] * SAMPLE_TIME) / 100000.0);
+ 324              		.loc 1 34 5 is_stmt 1 view .LVU60
+ 325              		.loc 1 34 45 is_stmt 0 view .LVU61
+ 326 0042 206D     		ldr	r0, [r4, #80]	@ float
+ 327 0044 FFF7FEFF 		bl	__aeabi_f2d
+ 328              	.LVL40:
+ 329 0048 0646     		mov	r6, r0
+ 330 004a 0F46     		mov	r7, r1
+ 331              		.loc 1 34 57 view .LVU62
+ 332 004c D4ED117A 		vldr.32	s15, [r4, #68]
+ 333              		.loc 1 34 59 view .LVU63
+ 334 0050 67EE887A 		vmul.f32	s15, s15, s16
+ 335 0054 17EE900A 		vmov	r0, s15
+ 336 0058 FFF7FEFF 		bl	__aeabi_f2d
+ 337              	.LVL41:
+ 338              		.loc 1 34 74 view .LVU64
+ 339 005c 16A3     		adr	r3, .L16
+ 340 005e D3E90023 		ldrd	r2, [r3]
+ 341 0062 FFF7FEFF 		bl	__aeabi_ddiv
+ 342              	.LVL42:
+ 343 0066 0246     		mov	r2, r0
+ 344 0068 0B46     		mov	r3, r1
+ 345              		.loc 1 34 47 view .LVU65
+ 346 006a 3046     		mov	r0, r6
+ 347 006c 3946     		mov	r1, r7
+ 348 006e FFF7FEFF 		bl	__aeabi_dadd
+ 349              	.LVL43:
+ 350 0072 FFF7FEFF 		bl	__aeabi_d2f
+ 351              	.LVL44:
+ 352              		.loc 1 34 25 view .LVU66
+ 353 0076 2065     		str	r0, [r4, #80]	@ float
+  35:Core/Src/distance.cpp ****     finaldistance[2][0] = finaldistance[2][0] + ((c[2][0] * SAMPLE_TIME) / 100000.0);
+ 354              		.loc 1 35 5 is_stmt 1 view .LVU67
+ 355              		.loc 1 35 45 is_stmt 0 view .LVU68
+ 356 0078 606D     		ldr	r0, [r4, #84]	@ float
+ 357 007a FFF7FEFF 		bl	__aeabi_f2d
+ 358              	.LVL45:
+ 359 007e 0646     		mov	r6, r0
+ 360 0080 0F46     		mov	r7, r1
+ 361              		.loc 1 35 57 view .LVU69
+ 362 0082 D4ED127A 		vldr.32	s15, [r4, #72]
+ 363              		.loc 1 35 59 view .LVU70
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 8
+
+
+ 364 0086 67EE887A 		vmul.f32	s15, s15, s16
+ 365 008a 17EE900A 		vmov	r0, s15
+ 366 008e FFF7FEFF 		bl	__aeabi_f2d
+ 367              	.LVL46:
+ 368              		.loc 1 35 74 view .LVU71
+ 369 0092 09A3     		adr	r3, .L16
+ 370 0094 D3E90023 		ldrd	r2, [r3]
+ 371 0098 FFF7FEFF 		bl	__aeabi_ddiv
+ 372              	.LVL47:
+ 373 009c 0246     		mov	r2, r0
+ 374 009e 0B46     		mov	r3, r1
+ 375              		.loc 1 35 47 view .LVU72
+ 376 00a0 3046     		mov	r0, r6
+ 377 00a2 3946     		mov	r1, r7
+ 378 00a4 FFF7FEFF 		bl	__aeabi_dadd
+ 379              	.LVL48:
+ 380 00a8 FFF7FEFF 		bl	__aeabi_d2f
+ 381              	.LVL49:
+ 382              		.loc 1 35 25 view .LVU73
+ 383 00ac 6065     		str	r0, [r4, #84]	@ float
+  36:Core/Src/distance.cpp ****     //printf("time= %ld", time);
+  37:Core/Src/distance.cpp ****     //printf("\n finaldistance= %f", finaldistance[i][0]);
+  38:Core/Src/distance.cpp **** }
+ 384              		.loc 1 38 1 view .LVU74
+ 385 00ae BDEC028B 		vldm	sp!, {d8}
+ 386              	.LCFI6:
+ 387              		.cfi_restore 80
+ 388              		.cfi_restore 81
+ 389              		.cfi_def_cfa_offset 16
+ 390 00b2 D0BD     		pop	{r4, r6, r7, pc}
+ 391              	.LVL50:
+ 392              	.L17:
+ 393              		.loc 1 38 1 view .LVU75
+ 394 00b4 AFF30080 		.align	3
+ 395              	.L16:
+ 396 00b8 00000000 		.word	0
+ 397 00bc 006AF840 		.word	1090021888
+ 398              		.cfi_endproc
+ 399              	.LFE387:
+ 401              		.section	.text._Z15calculate1_datav,"ax",%progbits
+ 402              		.align	1
+ 403              		.global	_Z15calculate1_datav
+ 404              		.syntax unified
+ 405              		.thumb
+ 406              		.thumb_func
+ 407              		.fpu fpv4-sp-d16
+ 409              	_Z15calculate1_datav:
+ 410              	.LFB388:
+  39:Core/Src/distance.cpp **** void calculate1_data(void)
+  40:Core/Src/distance.cpp **** {
+ 411              		.loc 1 40 1 is_stmt 1 view -0
+ 412              		.cfi_startproc
+ 413              		@ args = 0, pretend = 0, frame = 0
+ 414              		@ frame_needed = 0, uses_anonymous_args = 0
+ 415 0000 08B5     		push	{r3, lr}
+ 416              	.LCFI7:
+ 417              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 9
+
+
+ 418              		.cfi_offset 3, -8
+ 419              		.cfi_offset 14, -4
+  41:Core/Src/distance.cpp ****     dis.calculate1();
+ 420              		.loc 1 41 5 view .LVU77
+ 421              		.loc 1 41 19 is_stmt 0 view .LVU78
+ 422 0002 0248     		ldr	r0, .L20
+ 423 0004 FFF7FEFF 		bl	_ZN8distance10calculate1Ev
+ 424              	.LVL51:
+  42:Core/Src/distance.cpp **** }
+ 425              		.loc 1 42 1 view .LVU79
+ 426 0008 08BD     		pop	{r3, pc}
+ 427              	.L21:
+ 428 000a 00BF     		.align	2
+ 429              	.L20:
+ 430 000c 00000000 		.word	.LANCHOR0
+ 431              		.cfi_endproc
+ 432              	.LFE388:
+ 434              		.section	.text._Z15calculate2_datav,"ax",%progbits
+ 435              		.align	1
+ 436              		.global	_Z15calculate2_datav
+ 437              		.syntax unified
+ 438              		.thumb
+ 439              		.thumb_func
+ 440              		.fpu fpv4-sp-d16
+ 442              	_Z15calculate2_datav:
+ 443              	.LFB389:
+  43:Core/Src/distance.cpp **** void calculate2_data(void)
+  44:Core/Src/distance.cpp **** {
+ 444              		.loc 1 44 1 is_stmt 1 view -0
+ 445              		.cfi_startproc
+ 446              		@ args = 0, pretend = 0, frame = 0
+ 447              		@ frame_needed = 0, uses_anonymous_args = 0
+ 448 0000 08B5     		push	{r3, lr}
+ 449              	.LCFI8:
+ 450              		.cfi_def_cfa_offset 8
+ 451              		.cfi_offset 3, -8
+ 452              		.cfi_offset 14, -4
+  45:Core/Src/distance.cpp ****     dis.calculate2();
+ 453              		.loc 1 45 5 view .LVU81
+ 454              		.loc 1 45 19 is_stmt 0 view .LVU82
+ 455 0002 0248     		ldr	r0, .L24
+ 456 0004 FFF7FEFF 		bl	_ZN8distance10calculate2Ev
+ 457              	.LVL52:
+  46:Core/Src/distance.cpp **** }
+ 458              		.loc 1 46 1 view .LVU83
+ 459 0008 08BD     		pop	{r3, pc}
+ 460              	.L25:
+ 461 000a 00BF     		.align	2
+ 462              	.L24:
+ 463 000c 00000000 		.word	.LANCHOR0
+ 464              		.cfi_endproc
+ 465              	.LFE389:
+ 467              		.section	.text._Z15calculate3_datav,"ax",%progbits
+ 468              		.align	1
+ 469              		.global	_Z15calculate3_datav
+ 470              		.syntax unified
+ 471              		.thumb
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 10
+
+
+ 472              		.thumb_func
+ 473              		.fpu fpv4-sp-d16
+ 475              	_Z15calculate3_datav:
+ 476              	.LFB390:
+  47:Core/Src/distance.cpp **** void calculate3_data(void)
+  48:Core/Src/distance.cpp **** {
+ 477              		.loc 1 48 1 is_stmt 1 view -0
+ 478              		.cfi_startproc
+ 479              		@ args = 0, pretend = 0, frame = 0
+ 480              		@ frame_needed = 0, uses_anonymous_args = 0
+ 481 0000 08B5     		push	{r3, lr}
+ 482              	.LCFI9:
+ 483              		.cfi_def_cfa_offset 8
+ 484              		.cfi_offset 3, -8
+ 485              		.cfi_offset 14, -4
+  49:Core/Src/distance.cpp ****     dis.calculate3();
+ 486              		.loc 1 49 5 view .LVU85
+ 487              		.loc 1 49 19 is_stmt 0 view .LVU86
+ 488 0002 0248     		ldr	r0, .L28
+ 489 0004 FFF7FEFF 		bl	_ZN8distance10calculate3Ev
+ 490              	.LVL53:
+  50:Core/Src/distance.cpp **** }
+ 491              		.loc 1 50 1 view .LVU87
+ 492 0008 08BD     		pop	{r3, pc}
+ 493              	.L29:
+ 494 000a 00BF     		.align	2
+ 495              	.L28:
+ 496 000c 00000000 		.word	.LANCHOR0
+ 497              		.cfi_endproc
+ 498              	.LFE390:
+ 500              		.section	.text._Z15getfinaldata_vxv,"ax",%progbits
+ 501              		.align	1
+ 502              		.global	_Z15getfinaldata_vxv
+ 503              		.syntax unified
+ 504              		.thumb
+ 505              		.thumb_func
+ 506              		.fpu fpv4-sp-d16
+ 508              	_Z15getfinaldata_vxv:
+ 509              	.LFB391:
+  51:Core/Src/distance.cpp **** float getfinaldata_vx(void)
+  52:Core/Src/distance.cpp **** {
+ 510              		.loc 1 52 1 is_stmt 1 view -0
+ 511              		.cfi_startproc
+ 512              		@ args = 0, pretend = 0, frame = 0
+ 513              		@ frame_needed = 0, uses_anonymous_args = 0
+ 514              		@ link register save eliminated.
+  53:Core/Src/distance.cpp ****     return dis.get_vx();
+ 515              		.loc 1 53 5 view .LVU89
+ 516              	.LVL54:
+ 517              	.LBB13:
+ 518              	.LBI13:
+ 519              		.file 2 "Core/Inc/distance.h"
+   1:Core/Inc/distance.h **** #include "stm32f4xx_hal.h"
+   2:Core/Inc/distance.h **** #include "tim.h"
+   3:Core/Inc/distance.h **** #include "stm32f4xx_hal_gpio.h"
+   4:Core/Inc/distance.h **** //#include "encoder.h"
+   5:Core/Inc/distance.h **** 
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 11
+
+
+   6:Core/Inc/distance.h **** #define RADIUS (6.8)
+   7:Core/Inc/distance.h **** 
+   8:Core/Inc/distance.h **** class distance
+   9:Core/Inc/distance.h **** {
+  10:Core/Inc/distance.h **** public:
+  11:Core/Inc/distance.h ****     void calculate1(void);
+  12:Core/Inc/distance.h ****     void calculate2(void);
+  13:Core/Inc/distance.h ****     void calculate3(void);
+  14:Core/Inc/distance.h ****     float get_vx()
+ 520              		.loc 2 14 11 view .LVU90
+ 521              	.LBB14:
+  15:Core/Inc/distance.h ****     {
+  16:Core/Inc/distance.h ****         return finaldistance[0][0];
+ 522              		.loc 2 16 9 view .LVU91
+ 523              		.loc 2 16 9 is_stmt 0 view .LVU92
+ 524              	.LBE14:
+ 525              	.LBE13:
+  54:Core/Src/distance.cpp **** }
+ 526              		.loc 1 54 1 view .LVU93
+ 527 0000 014B     		ldr	r3, .L31
+ 528 0002 93ED130A 		vldr.32	s0, [r3, #76]
+ 529 0006 7047     		bx	lr
+ 530              	.L32:
+ 531              		.align	2
+ 532              	.L31:
+ 533 0008 00000000 		.word	.LANCHOR0
+ 534              		.cfi_endproc
+ 535              	.LFE391:
+ 537              		.section	.text._Z15getfinaldata_vyv,"ax",%progbits
+ 538              		.align	1
+ 539              		.global	_Z15getfinaldata_vyv
+ 540              		.syntax unified
+ 541              		.thumb
+ 542              		.thumb_func
+ 543              		.fpu fpv4-sp-d16
+ 545              	_Z15getfinaldata_vyv:
+ 546              	.LFB392:
+  55:Core/Src/distance.cpp **** float getfinaldata_vy(void)
+  56:Core/Src/distance.cpp **** {
+ 547              		.loc 1 56 1 is_stmt 1 view -0
+ 548              		.cfi_startproc
+ 549              		@ args = 0, pretend = 0, frame = 0
+ 550              		@ frame_needed = 0, uses_anonymous_args = 0
+ 551              		@ link register save eliminated.
+  57:Core/Src/distance.cpp ****     return dis.get_vy();
+ 552              		.loc 1 57 5 view .LVU95
+ 553              	.LVL55:
+ 554              	.LBB15:
+ 555              	.LBI15:
+  17:Core/Inc/distance.h ****     }
+  18:Core/Inc/distance.h ****     float get_vy()
+ 556              		.loc 2 18 11 view .LVU96
+ 557              	.LBB16:
+  19:Core/Inc/distance.h ****     {
+  20:Core/Inc/distance.h ****         return finaldistance[1][0];
+ 558              		.loc 2 20 9 view .LVU97
+ 559              		.loc 2 20 9 is_stmt 0 view .LVU98
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 12
+
+
+ 560              	.LBE16:
+ 561              	.LBE15:
+  58:Core/Src/distance.cpp **** }
+ 562              		.loc 1 58 1 view .LVU99
+ 563 0000 014B     		ldr	r3, .L34
+ 564 0002 93ED140A 		vldr.32	s0, [r3, #80]
+ 565 0006 7047     		bx	lr
+ 566              	.L35:
+ 567              		.align	2
+ 568              	.L34:
+ 569 0008 00000000 		.word	.LANCHOR0
+ 570              		.cfi_endproc
+ 571              	.LFE392:
+ 573              		.section	.text._Z15getfinaldata_vwv,"ax",%progbits
+ 574              		.align	1
+ 575              		.global	_Z15getfinaldata_vwv
+ 576              		.syntax unified
+ 577              		.thumb
+ 578              		.thumb_func
+ 579              		.fpu fpv4-sp-d16
+ 581              	_Z15getfinaldata_vwv:
+ 582              	.LFB393:
+  59:Core/Src/distance.cpp **** float getfinaldata_vw(void)
+  60:Core/Src/distance.cpp **** {
+ 583              		.loc 1 60 1 is_stmt 1 view -0
+ 584              		.cfi_startproc
+ 585              		@ args = 0, pretend = 0, frame = 0
+ 586              		@ frame_needed = 0, uses_anonymous_args = 0
+ 587              		@ link register save eliminated.
+  61:Core/Src/distance.cpp ****     return dis.get_vw();
+ 588              		.loc 1 61 5 view .LVU101
+ 589              	.LVL56:
+ 590              	.LBB17:
+ 591              	.LBI17:
+  21:Core/Inc/distance.h ****     }
+  22:Core/Inc/distance.h ****     float get_vw()
+ 592              		.loc 2 22 11 view .LVU102
+ 593              	.LBB18:
+  23:Core/Inc/distance.h ****     {
+  24:Core/Inc/distance.h ****         return finaldistance[2][0];
+ 594              		.loc 2 24 9 view .LVU103
+ 595              		.loc 2 24 9 is_stmt 0 view .LVU104
+ 596              	.LBE18:
+ 597              	.LBE17:
+  62:Core/Src/distance.cpp **** }
+ 598              		.loc 1 62 1 view .LVU105
+ 599 0000 014B     		ldr	r3, .L37
+ 600 0002 93ED150A 		vldr.32	s0, [r3, #84]
+ 601 0006 7047     		bx	lr
+ 602              	.L38:
+ 603              		.align	2
+ 604              	.L37:
+ 605 0008 00000000 		.word	.LANCHOR0
+ 606              		.cfi_endproc
+ 607              	.LFE393:
+ 609              		.global	dis
+ 610              		.section	.data.dis,"aw"
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 13
+
+
+ 611              		.align	2
+ 612              		.set	.LANCHOR0,. + 0
+ 615              	dis:
+ 616 0000 0000803E 		.word	1048576000
+ 617 0004 0000803E 		.word	1048576000
+ 618 0008 000080BE 		.word	-1098907648
+ 619 000c 000080BE 		.word	-1098907648
+ 620 0010 0000803E 		.word	1048576000
+ 621 0014 000080BE 		.word	-1098907648
+ 622 0018 000080BE 		.word	-1098907648
+ 623 001c 0000803E 		.word	1048576000
+ 624 0020 0000803E 		.word	1048576000
+ 625 0024 0000803E 		.word	1048576000
+ 626 0028 0000803E 		.word	1048576000
+ 627 002c 0000803E 		.word	1048576000
+ 628 0030 00000000 		.space	16
+ 628      00000000 
+ 628      00000000 
+ 628      00000000 
+ 629 0040 00000000 		.space	12
+ 629      00000000 
+ 629      00000000 
+ 630 004c 00000000 		.space	12
+ 630      00000000 
+ 630      00000000 
+ 631              		.text
+ 632              	.Letext0:
+ 633              		.file 3 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 634              		.file 4 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 635              		.file 5 "Drivers/CMSIS/Include/core_cm4.h"
+ 636              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 637              		.file 7 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 638              		.file 8 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 639              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 640              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 641              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 642              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 643              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 644              		.file 14 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 645              		.file 15 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 646              		.file 16 "c:\\vsarm\\armcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 647              		.file 17 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 648              		.file 18 "Core/Inc/tim.h"
+ 649              		.file 19 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\bits\\cpp_type_traits.h"
+ 650              		.file 20 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\cmath"
+ 651              		.file 21 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\bits\\std_abs.h"
+ 652              		.file 22 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\arm-none-eabi\\thumb\\v7e-m+fp\\ha
+ 653              		.file 23 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\math.h"
+ 654              		.file 24 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\stdlib.h"
+ 655              		.file 25 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\math.h"
+ 656              		.file 26 "Core/Inc/usart.h"
+ 657              		.file 27 "Core/Inc/encoder.h"
+ 658              		.file 28 "<built-in>"
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 distance.cpp
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:21     .text._ZN8distance10calculate1Ev:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:29     .text._ZN8distance10calculate1Ev:00000000 _ZN8distance10calculate1Ev
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:141    .text._ZN8distance10calculate1Ev:00000098 $d
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:147    .text._ZN8distance10calculate2Ev:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:154    .text._ZN8distance10calculate2Ev:00000000 _ZN8distance10calculate2Ev
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:254    .text._ZN8distance10calculate2Ev:00000068 $d
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:263    .text._ZN8distance10calculate3Ev:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:270    .text._ZN8distance10calculate3Ev:00000000 _ZN8distance10calculate3Ev
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:396    .text._ZN8distance10calculate3Ev:000000b8 $d
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:402    .text._Z15calculate1_datav:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:409    .text._Z15calculate1_datav:00000000 _Z15calculate1_datav
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:430    .text._Z15calculate1_datav:0000000c $d
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:435    .text._Z15calculate2_datav:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:442    .text._Z15calculate2_datav:00000000 _Z15calculate2_datav
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:463    .text._Z15calculate2_datav:0000000c $d
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:468    .text._Z15calculate3_datav:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:475    .text._Z15calculate3_datav:00000000 _Z15calculate3_datav
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:496    .text._Z15calculate3_datav:0000000c $d
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:501    .text._Z15getfinaldata_vxv:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:508    .text._Z15getfinaldata_vxv:00000000 _Z15getfinaldata_vxv
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:533    .text._Z15getfinaldata_vxv:00000008 $d
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:538    .text._Z15getfinaldata_vyv:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:545    .text._Z15getfinaldata_vyv:00000000 _Z15getfinaldata_vyv
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:569    .text._Z15getfinaldata_vyv:00000008 $d
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:574    .text._Z15getfinaldata_vwv:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:581    .text._Z15getfinaldata_vwv:00000000 _Z15getfinaldata_vwv
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:605    .text._Z15getfinaldata_vwv:00000008 $d
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:615    .data.dis:00000000 dis
+C:\Users\DELL\AppData\Local\Temp\ccTUZYTH.s:611    .data.dis:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_f2d
+__aeabi_dmul
+__aeabi_d2f
+_Z14calculate_datai
+_Z8get_datai
+__aeabi_ddiv
+__aeabi_dadd

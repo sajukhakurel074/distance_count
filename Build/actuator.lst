@@ -1,0 +1,402 @@
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"actuator.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text._Z41__static_initialization_and_destruction_0ii,"ax",%progbits
+  18              		.align	1
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	_Z41__static_initialization_and_destruction_0ii:
+  26              	.LVL0:
+  27              	.LFB383:
+  28              		.file 1 "Core/Src/actuator.cpp"
+   1:Core/Src/actuator.cpp **** #include "actuator.h"
+   2:Core/Src/actuator.cpp **** #include "main.h"
+   3:Core/Src/actuator.cpp **** #include "distance.h"
+   4:Core/Src/actuator.cpp **** 
+   5:Core/Src/actuator.cpp **** extern motor motor[4];
+   6:Core/Src/actuator.cpp **** float velocity = 10;
+   7:Core/Src/actuator.cpp **** 
+   8:Core/Src/actuator.cpp **** int32_t time = HAL_GetTick();
+   9:Core/Src/actuator.cpp **** void play(void)
+  10:Core/Src/actuator.cpp **** {
+  11:Core/Src/actuator.cpp ****     if ((HAL_GetTick() - time) >= SAMPLE_TIME)
+  12:Core/Src/actuator.cpp ****     {
+  13:Core/Src/actuator.cpp ****         time = HAL_GetTick();
+  14:Core/Src/actuator.cpp ****         //motor[0].set_omega(-5);
+  15:Core/Src/actuator.cpp ****         //motor[1].set_omega(5);
+  16:Core/Src/actuator.cpp ****         //motor[2].set_omega(-5);
+  17:Core/Src/actuator.cpp ****         //motor[3].set_omega(5);
+  18:Core/Src/actuator.cpp **** 
+  19:Core/Src/actuator.cpp ****         calculate1_data();
+  20:Core/Src/actuator.cpp ****         calculate2_data();
+  21:Core/Src/actuator.cpp ****         calculate3_data();
+  22:Core/Src/actuator.cpp **** 
+  23:Core/Src/actuator.cpp ****         float vx = getfinaldata_vx();
+  24:Core/Src/actuator.cpp ****         float vy = getfinaldata_vy();
+  25:Core/Src/actuator.cpp ****         float vw = getfinaldata_vw() * 57.3 * 3.3;
+  26:Core/Src/actuator.cpp **** 
+  27:Core/Src/actuator.cpp ****         printf("Vx: %0.4f, Vy: %0.4f, Vw: %0.4f\n", vx, vy, vw);
+  28:Core/Src/actuator.cpp ****     }
+  29:Core/Src/actuator.cpp **** }
+  29              		.loc 1 29 1 view -0
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s 			page 2
+
+
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 29 1 is_stmt 0 view .LVU1
+  34 0000 0128     		cmp	r0, #1
+  35 0002 00D0     		beq	.L7
+  36 0004 7047     		bx	lr
+  37              	.L7:
+  38              		.loc 1 29 1 discriminator 1 view .LVU2
+  39 0006 08B5     		push	{r3, lr}
+  40              	.LCFI0:
+  41              		.cfi_def_cfa_offset 8
+  42              		.cfi_offset 3, -8
+  43              		.cfi_offset 14, -4
+  44              		.loc 1 29 1 discriminator 1 view .LVU3
+  45 0008 4FF6FF73 		movw	r3, #65535
+  46 000c 9942     		cmp	r1, r3
+  47 000e 00D0     		beq	.L8
+  48              	.LVL1:
+  49              	.L1:
+  50              		.loc 1 29 1 view .LVU4
+  51 0010 08BD     		pop	{r3, pc}
+  52              	.LVL2:
+  53              	.L8:
+   8:Core/Src/actuator.cpp **** void play(void)
+  54              		.loc 1 8 27 view .LVU5
+  55 0012 FFF7FEFF 		bl	HAL_GetTick
+  56              	.LVL3:
+   8:Core/Src/actuator.cpp **** void play(void)
+  57              		.loc 1 8 9 view .LVU6
+  58 0016 014B     		ldr	r3, .L9
+  59 0018 1860     		str	r0, [r3]
+  60              		.loc 1 29 1 view .LVU7
+  61 001a F9E7     		b	.L1
+  62              	.L10:
+  63              		.align	2
+  64              	.L9:
+  65 001c 00000000 		.word	.LANCHOR0
+  66              		.cfi_endproc
+  67              	.LFE383:
+  69              		.global	__aeabi_f2d
+  70              		.global	__aeabi_dmul
+  71              		.global	__aeabi_d2f
+  72              		.section	.rodata._Z4playv.str1.4,"aMS",%progbits,1
+  73              		.align	2
+  74              	.LC0:
+  75 0000 56783A20 		.ascii	"Vx: %0.4f, Vy: %0.4f, Vw: %0.4f\012\000"
+  75      25302E34 
+  75      662C2056 
+  75      793A2025 
+  75      302E3466 
+  76              		.section	.text._Z4playv,"ax",%progbits
+  77              		.align	1
+  78              		.global	_Z4playv
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s 			page 3
+
+
+  82              		.fpu fpv4-sp-d16
+  84              	_Z4playv:
+  85              	.LFB382:
+  10:Core/Src/actuator.cpp ****     if ((HAL_GetTick() - time) >= SAMPLE_TIME)
+  86              		.loc 1 10 1 is_stmt 1 view -0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  91              	.LCFI1:
+  92              		.cfi_def_cfa_offset 20
+  93              		.cfi_offset 4, -20
+  94              		.cfi_offset 5, -16
+  95              		.cfi_offset 6, -12
+  96              		.cfi_offset 7, -8
+  97              		.cfi_offset 14, -4
+  98 0002 85B0     		sub	sp, sp, #20
+  99              	.LCFI2:
+ 100              		.cfi_def_cfa_offset 40
+  11:Core/Src/actuator.cpp ****     {
+ 101              		.loc 1 11 5 view .LVU9
+ 102              	.LBB2:
+  11:Core/Src/actuator.cpp ****     {
+ 103              		.loc 1 11 21 is_stmt 0 view .LVU10
+ 104 0004 FFF7FEFF 		bl	HAL_GetTick
+ 105              	.LVL4:
+  11:Core/Src/actuator.cpp ****     {
+ 106              		.loc 1 11 26 view .LVU11
+ 107 0008 254B     		ldr	r3, .L15+16
+ 108 000a 1B68     		ldr	r3, [r3]
+  11:Core/Src/actuator.cpp ****     {
+ 109              		.loc 1 11 24 view .LVU12
+ 110 000c C01A     		subs	r0, r0, r3
+  11:Core/Src/actuator.cpp ****     {
+ 111              		.loc 1 11 5 view .LVU13
+ 112 000e 0428     		cmp	r0, #4
+ 113 0010 01D8     		bhi	.L14
+ 114              	.L11:
+ 115              	.LBE2:
+ 116              		.loc 1 29 1 view .LVU14
+ 117 0012 05B0     		add	sp, sp, #20
+ 118              	.LCFI3:
+ 119              		.cfi_remember_state
+ 120              		.cfi_def_cfa_offset 20
+ 121              		@ sp needed
+ 122 0014 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 123              	.L14:
+ 124              	.LCFI4:
+ 125              		.cfi_restore_state
+ 126              	.LBB4:
+ 127              	.LBB3:
+  13:Core/Src/actuator.cpp ****         //motor[0].set_omega(-5);
+ 128              		.loc 1 13 9 is_stmt 1 view .LVU15
+  13:Core/Src/actuator.cpp ****         //motor[0].set_omega(-5);
+ 129              		.loc 1 13 27 is_stmt 0 view .LVU16
+ 130 0016 FFF7FEFF 		bl	HAL_GetTick
+ 131              	.LVL5:
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s 			page 4
+
+
+  13:Core/Src/actuator.cpp ****         //motor[0].set_omega(-5);
+ 132              		.loc 1 13 14 view .LVU17
+ 133 001a 214B     		ldr	r3, .L15+16
+ 134 001c 1860     		str	r0, [r3]
+  19:Core/Src/actuator.cpp ****         calculate2_data();
+ 135              		.loc 1 19 9 is_stmt 1 view .LVU18
+  19:Core/Src/actuator.cpp ****         calculate2_data();
+ 136              		.loc 1 19 24 is_stmt 0 view .LVU19
+ 137 001e FFF7FEFF 		bl	_Z15calculate1_datav
+ 138              	.LVL6:
+  20:Core/Src/actuator.cpp ****         calculate3_data();
+ 139              		.loc 1 20 9 is_stmt 1 view .LVU20
+  20:Core/Src/actuator.cpp ****         calculate3_data();
+ 140              		.loc 1 20 24 is_stmt 0 view .LVU21
+ 141 0022 FFF7FEFF 		bl	_Z15calculate2_datav
+ 142              	.LVL7:
+  21:Core/Src/actuator.cpp **** 
+ 143              		.loc 1 21 9 is_stmt 1 view .LVU22
+  21:Core/Src/actuator.cpp **** 
+ 144              		.loc 1 21 24 is_stmt 0 view .LVU23
+ 145 0026 FFF7FEFF 		bl	_Z15calculate3_datav
+ 146              	.LVL8:
+  23:Core/Src/actuator.cpp ****         float vy = getfinaldata_vy();
+ 147              		.loc 1 23 9 is_stmt 1 view .LVU24
+  23:Core/Src/actuator.cpp ****         float vy = getfinaldata_vy();
+ 148              		.loc 1 23 35 is_stmt 0 view .LVU25
+ 149 002a FFF7FEFF 		bl	_Z15getfinaldata_vxv
+ 150              	.LVL9:
+ 151 002e 10EE104A 		vmov	r4, s0
+ 152              	.LVL10:
+  24:Core/Src/actuator.cpp ****         float vw = getfinaldata_vw() * 57.3 * 3.3;
+ 153              		.loc 1 24 9 is_stmt 1 view .LVU26
+  24:Core/Src/actuator.cpp ****         float vw = getfinaldata_vw() * 57.3 * 3.3;
+ 154              		.loc 1 24 35 is_stmt 0 view .LVU27
+ 155 0032 FFF7FEFF 		bl	_Z15getfinaldata_vyv
+ 156              	.LVL11:
+ 157 0036 10EE106A 		vmov	r6, s0
+ 158              	.LVL12:
+  25:Core/Src/actuator.cpp **** 
+ 159              		.loc 1 25 9 is_stmt 1 view .LVU28
+  25:Core/Src/actuator.cpp **** 
+ 160              		.loc 1 25 35 is_stmt 0 view .LVU29
+ 161 003a FFF7FEFF 		bl	_Z15getfinaldata_vwv
+ 162              	.LVL13:
+ 163 003e 10EE100A 		vmov	r0, s0
+ 164 0042 FFF7FEFF 		bl	__aeabi_f2d
+ 165              	.LVL14:
+  25:Core/Src/actuator.cpp **** 
+ 166              		.loc 1 25 38 view .LVU30
+ 167 0046 12A3     		adr	r3, .L15
+ 168 0048 D3E90023 		ldrd	r2, [r3]
+ 169 004c FFF7FEFF 		bl	__aeabi_dmul
+ 170              	.LVL15:
+  25:Core/Src/actuator.cpp **** 
+ 171              		.loc 1 25 45 view .LVU31
+ 172 0050 11A3     		adr	r3, .L15+8
+ 173 0052 D3E90023 		ldrd	r2, [r3]
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s 			page 5
+
+
+ 174 0056 FFF7FEFF 		bl	__aeabi_dmul
+ 175              	.LVL16:
+  25:Core/Src/actuator.cpp **** 
+ 176              		.loc 1 25 47 view .LVU32
+ 177 005a FFF7FEFF 		bl	__aeabi_d2f
+ 178              	.LVL17:
+ 179 005e 0746     		mov	r7, r0	@ float
+ 180              	.LVL18:
+  27:Core/Src/actuator.cpp ****     }
+ 181              		.loc 1 27 9 is_stmt 1 view .LVU33
+  27:Core/Src/actuator.cpp ****     }
+ 182              		.loc 1 27 15 is_stmt 0 view .LVU34
+ 183 0060 2046     		mov	r0, r4	@ float
+ 184              	.LVL19:
+  27:Core/Src/actuator.cpp ****     }
+ 185              		.loc 1 27 15 view .LVU35
+ 186 0062 FFF7FEFF 		bl	__aeabi_f2d
+ 187              	.LVL20:
+ 188 0066 0446     		mov	r4, r0
+ 189              	.LVL21:
+  27:Core/Src/actuator.cpp ****     }
+ 190              		.loc 1 27 15 view .LVU36
+ 191 0068 0D46     		mov	r5, r1
+ 192 006a 3846     		mov	r0, r7	@ float
+ 193 006c FFF7FEFF 		bl	__aeabi_f2d
+ 194              	.LVL22:
+ 195 0070 CDE90201 		strd	r0, [sp, #8]
+ 196 0074 3046     		mov	r0, r6	@ float
+ 197 0076 FFF7FEFF 		bl	__aeabi_f2d
+ 198              	.LVL23:
+ 199 007a CDE90001 		strd	r0, [sp]
+ 200 007e 2246     		mov	r2, r4
+ 201 0080 2B46     		mov	r3, r5
+ 202 0082 0848     		ldr	r0, .L15+20
+ 203 0084 FFF7FEFF 		bl	printf
+ 204              	.LVL24:
+ 205              	.LBE3:
+ 206              	.LBE4:
+ 207              		.loc 1 29 1 view .LVU37
+ 208 0088 C3E7     		b	.L11
+ 209              	.L16:
+ 210 008a 00BFAFF3 		.align	3
+ 210      0080
+ 211              	.L15:
+ 212 0090 66666666 		.word	1717986918
+ 213 0094 66A64C40 		.word	1078765158
+ 214 0098 66666666 		.word	1717986918
+ 215 009c 66660A40 		.word	1074423398
+ 216 00a0 00000000 		.word	.LANCHOR0
+ 217 00a4 00000000 		.word	.LC0
+ 218              		.cfi_endproc
+ 219              	.LFE382:
+ 221              		.section	.text._GLOBAL__sub_I_velocity,"ax",%progbits
+ 222              		.align	1
+ 223              		.syntax unified
+ 224              		.thumb
+ 225              		.thumb_func
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s 			page 6
+
+
+ 226              		.fpu fpv4-sp-d16
+ 228              	_GLOBAL__sub_I_velocity:
+ 229              	.LFB384:
+ 230              		.loc 1 29 1 is_stmt 1 view -0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 0
+ 233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234 0000 08B5     		push	{r3, lr}
+ 235              	.LCFI5:
+ 236              		.cfi_def_cfa_offset 8
+ 237              		.cfi_offset 3, -8
+ 238              		.cfi_offset 14, -4
+ 239              		.loc 1 29 1 is_stmt 0 view .LVU39
+ 240 0002 4FF6FF71 		movw	r1, #65535
+ 241 0006 0120     		movs	r0, #1
+ 242 0008 FFF7FEFF 		bl	_Z41__static_initialization_and_destruction_0ii
+ 243              	.LVL25:
+ 244 000c 08BD     		pop	{r3, pc}
+ 245              		.cfi_endproc
+ 246              	.LFE384:
+ 248              		.section	.init_array,"aw",%init_array
+ 249              		.align	2
+ 250 0000 00000000 		.word	_GLOBAL__sub_I_velocity(target1)
+ 251              		.global	time
+ 252              		.global	velocity
+ 253              		.section	.bss.time,"aw",%nobits
+ 254              		.align	2
+ 255              		.set	.LANCHOR0,. + 0
+ 258              	time:
+ 259 0000 00000000 		.space	4
+ 260              		.section	.data.velocity,"aw"
+ 261              		.align	2
+ 264              	velocity:
+ 265 0000 00002041 		.word	1092616192
+ 266              		.text
+ 267              	.Letext0:
+ 268              		.file 2 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 269              		.file 3 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 270              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 271              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 272              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 273              		.file 7 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 274              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 275              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 276              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 277              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 278              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 279              		.file 13 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 280              		.file 14 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 281              		.file 15 "c:\\vsarm\\armcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 282              		.file 16 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 283              		.file 17 "Core/Inc/tim.h"
+ 284              		.file 18 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\bits\\cpp_type_traits.h"
+ 285              		.file 19 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\cmath"
+ 286              		.file 20 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\bits\\std_abs.h"
+ 287              		.file 21 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\arm-none-eabi\\thumb\\v7e-m+fp\\ha
+ 288              		.file 22 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\math.h"
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s 			page 7
+
+
+ 289              		.file 23 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\stdlib.h"
+ 290              		.file 24 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\c++\\9.2.1\\math.h"
+ 291              		.file 25 "Core/Inc/motor.h"
+ 292              		.file 26 "Core/Inc/usart.h"
+ 293              		.file 27 "Core/Inc/distance.h"
+ 294              		.file 28 "c:\\vsarm\\armcc\\arm-none-eabi\\include\\stdio.h"
+ 295              		.file 29 "<built-in>"
+ARM GAS  C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 actuator.cpp
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:18     .text._Z41__static_initialization_and_destruction_0ii:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:25     .text._Z41__static_initialization_and_destruction_0ii:00000000 _Z41__static_initialization_and_destruction_0ii
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:65     .text._Z41__static_initialization_and_destruction_0ii:0000001c $d
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:73     .rodata._Z4playv.str1.4:00000000 $d
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:77     .text._Z4playv:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:84     .text._Z4playv:00000000 _Z4playv
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:212    .text._Z4playv:00000090 $d
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:222    .text._GLOBAL__sub_I_velocity:00000000 $t
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:228    .text._GLOBAL__sub_I_velocity:00000000 _GLOBAL__sub_I_velocity
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:249    .init_array:00000000 $d
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:258    .bss.time:00000000 time
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:264    .data.velocity:00000000 velocity
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:254    .bss.time:00000000 $d
+C:\Users\DELL\AppData\Local\Temp\ccZ50dFA.s:261    .data.velocity:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GetTick
+__aeabi_f2d
+__aeabi_dmul
+__aeabi_d2f
+_Z15calculate1_datav
+_Z15calculate2_datav
+_Z15calculate3_datav
+_Z15getfinaldata_vxv
+_Z15getfinaldata_vyv
+_Z15getfinaldata_vwv
+printf
